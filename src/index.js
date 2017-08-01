@@ -1,3 +1,5 @@
+/* Anthony */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -82,20 +84,20 @@ class Game extends React.Component {
     };
   }
   render() {
-    return (
-      <div className="game">
-        <div className="game-board">
-         <Board
-            squares={current.squares}
-            onClick={(i) => this.handleClick(i)}
-          />
-        </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{/* TODO */}</ol>
-        </div>
-      </div>
-    );
+    const history = this.state.history;
+    const current = history[history.length - 1];
+    const winner = calculateWinner(current.squares);
+
+    const moves = history.map((step, move) => {
+      const desc = move ?
+        'Move #' + move :
+        'Game start';
+      return (
+        <li>
+          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+        </li>
+      );
+    });
   }
 }
 
